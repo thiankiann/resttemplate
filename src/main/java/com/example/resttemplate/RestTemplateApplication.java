@@ -17,7 +17,7 @@ public class RestTemplateApplication {
     }
     @EventListener(ApplicationStartedEvent.class)
     public void makeRequestToShawnMendesEndpoint(){
-        String response = shawnMendesClient.makeShawnMendesRequest("shawnmendes",1);
+        String response = shawnMendesClient.makeShawnMendesRequest("shawnmendes",5);
         System.out.println(response);
     }
 }
