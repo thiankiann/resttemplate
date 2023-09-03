@@ -15,11 +15,9 @@ public class RestTemplateApplication {
     public static void main(String[] args) {
         SpringApplication.run(RestTemplateApplication.class, args);
     }
-
     @EventListener(ApplicationStartedEvent.class)
     public void makeRequestToShawnMendesEndpoint(){
         String response = shawnMendesClient.makeShawnMendesRequest("shawnmendes",1);
         System.out.println(response);
     }
-
 }
