@@ -1,5 +1,6 @@
 package com.example.resttemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -13,9 +14,12 @@ public class ShawnMendesProxy {
     @Autowired
     RestTemplate restTemplate;
 
+    @Value("${adwww}")
+    String url;
+
     public String makeShawnMendesRequest(String term, Integer limit){
 
-        String uri = "https://itunes.apple.com/search?term=" + term + "&limit=" +limit;
+        String uri = url + "/search?term=" + term + "&limit=" + limit;
 
         ResponseEntity<String> exchange = restTemplate.exchange(
           uri,
