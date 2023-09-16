@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 // GET https://itunes.apple.com/search?term=shawnmendes&limit=1
@@ -19,20 +21,27 @@ public class ShawnMendesProxy {
     @Value("${adwww}")
     String url;
 
-    public ShawnMendesResponse makeShawnMendesRequest(String term, Integer limit) throws JsonProcessingException {
+    public String makeShawnMendesRequest(String term, Integer limit) throws JsonProcessingException {
 
         String uri = url + "/search?term=" + term + "&limit=" +limit;
 
-        ResponseEntity<String> response = restTemplate.exchange(
-          uri,
-          HttpMethod.GET,
-          null,
-          String.class
-        );
+        return makeRequest(uri);
+    }
 
-        String json = response.getBody();
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        return objectMapper.readValue(json, ShawnMendesResponse.class);
+    private String makeRequest(String uri) {
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(
+                    uri,
+                    HttpMethod.GET,
+                    null,
+                    String.class
+            );
+            return response.getBody();
+        } catch (RestClientResponseException exception) {
+            System.out.println(exception.getMessage() + " " + exception.getStatusCode());
+        } catch (RestClientException exception) {
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 }
