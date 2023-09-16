@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 // GET https://itunes.apple.com/search?term=shawnmendes&limit=1
@@ -34,12 +36,19 @@ public class ShawnMendesProxy {
     }
 
     private String makeRequest(String uri) {
-        ResponseEntity<String> response = restTemplate.exchange(
-                uri,
-                HttpMethod.GET,
-                null,
-                String.class
-        );
-        return response.getBody();
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(
+                    uri,
+                    HttpMethod.GET,
+                    null,
+                    String.class
+            );
+            return response.getBody();
+        } catch (RestClientResponseException exception) {
+            System.out.println(exception.getMessage());
+        } catch (RestClientException exception) {
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 }
