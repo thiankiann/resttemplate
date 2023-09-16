@@ -21,18 +21,11 @@ public class ShawnMendesProxy {
     @Value("${adwww}")
     String url;
 
-    public ShawnMendesResponse makeShawnMendesRequest(String term, Integer limit) throws JsonProcessingException {
+    public String makeShawnMendesRequest(String term, Integer limit) throws JsonProcessingException {
 
         String uri = url + "/search?term=" + term + "&limit=" +limit;
 
-        String json = makeRequest(uri);
-        return mapJasonToShawnMendesResponse(json);
-    }
-
-    private static ShawnMendesResponse mapJasonToShawnMendesResponse(String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        return objectMapper.readValue(json, ShawnMendesResponse.class);
+        return makeRequest(uri);
     }
 
     private String makeRequest(String uri) {
@@ -45,7 +38,7 @@ public class ShawnMendesProxy {
             );
             return response.getBody();
         } catch (RestClientResponseException exception) {
-            System.out.println(exception.getMessage());
+            System.out.println(exception.getMessage() + " " + exception.getStatusCode());
         } catch (RestClientException exception) {
             System.out.println(exception.getMessage());
         }
