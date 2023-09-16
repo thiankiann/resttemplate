@@ -23,16 +23,23 @@ public class ShawnMendesProxy {
 
         String uri = url + "/search?term=" + term + "&limit=" +limit;
 
-        ResponseEntity<String> response = restTemplate.exchange(
-          uri,
-          HttpMethod.GET,
-          null,
-          String.class
-        );
+        String json = makeRequest(uri);
+        return mapJasonToShawnMendesResponse(json);
+    }
 
-        String json = response.getBody();
+    private static ShawnMendesResponse mapJasonToShawnMendesResponse(String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         return objectMapper.readValue(json, ShawnMendesResponse.class);
+    }
+
+    private String makeRequest(String uri) {
+        ResponseEntity<String> response = restTemplate.exchange(
+                uri,
+                HttpMethod.GET,
+                null,
+                String.class
+        );
+        return response.getBody();
     }
 }
