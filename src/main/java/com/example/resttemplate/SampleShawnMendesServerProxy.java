@@ -1,6 +1,6 @@
 package com.example.resttemplate;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -9,39 +9,42 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
-
-// GET https://itunes.apple.com/search?term=shawnmendes&limit=1
-
+import org.springframework.web.util.UriComponentsBuilder;
+//GET localhost:8080/shawn/songs
 @Component
-public class ShawnMendesProxy {
+public class SampleShawnMendesServerProxy {
 
     @Autowired
     RestTemplate restTemplate;
 
-    @Value("${adwww}")
+    @Value("${sample-shawn-mendes-server.service.url}")
     String url;
 
-    public String makeShawnMendesRequest(String term, Integer limit) throws JsonProcessingException {
+    @Value("${sample-shawn-mendes-server.service.port}")
+    int port;
 
-        String uri = url + "/search?term=" + term + "&limit=" +limit;
-
-        return makeRequest(uri);
-    }
-
-    private String makeRequest(String uri) {
+    public String makeRequest() {
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .newInstance()
+                .scheme("http")
+                .host(url)
+                .port(port)
+                .path("/shawn/songs");
         try {
             ResponseEntity<String> response = restTemplate.exchange(
-                    uri,
+                    builder.build().toUri(),
                     HttpMethod.GET,
                     null,
                     String.class
             );
             return response.getBody();
         } catch (RestClientResponseException exception) {
-            System.out.println(exception.getMessage() + " " + exception.getStatusCode());
+            System.out.println(exception.getStatusText() + " " + exception.getStatusCode().value());
         } catch (RestClientException exception) {
             System.out.println(exception.getMessage());
         }
         return null;
     }
+
+
 }
