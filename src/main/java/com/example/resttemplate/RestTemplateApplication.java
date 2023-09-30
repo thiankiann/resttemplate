@@ -25,11 +25,11 @@ public class RestTemplateApplication {
 
     @EventListener(ApplicationStartedEvent.class)
     public void run() throws JsonProcessingException {
-        String json = shawnMendesClient.makeRequest("shawnmendes", 3);
-        if (json != null) {
-            ShawnMendesResponse shawnMendesResponse = mapJsonToShawnMendesResponse(json);
-            System.out.println(shawnMendesResponse);
-        }
+//        String json = shawnMendesClient.makeRequest("shawnmendes", 3);
+//        if (json != null) {
+//            ShawnMendesResponse shawnMendesResponse = mapJsonToShawnMendesResponse(json);
+//            System.out.println(shawnMendesResponse);
+//        }
 
 //        String jsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makeRequest();
 //        if (jsonSampleShawnMendesServer != null) {
@@ -37,9 +37,14 @@ public class RestTemplateApplication {
 //            System.out.println(sampleShawnMendesResponse);
 //        }
 
-        String jsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makePostRequest();
-        if (jsonSampleShawnMendesServer != null) {
-            SampleServerShawnMendesResponse sampleShawnMendesResponse = mapJsonToSampleShawnMendesResponse(jsonSampleShawnMendesServer);
+        String postJsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makePostRequest();
+        if (postJsonSampleShawnMendesServer != null) {
+            SampleServerShawnMendesResponse sampleShawnMendesResponse = mapJsonToSampleShawnMendesResponse(postJsonSampleShawnMendesServer);
+            System.out.println(sampleShawnMendesResponse);
+        }
+        String getJsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makeGetRequest();
+        if (getJsonSampleShawnMendesServer != null) {
+            SampleServerShawnMendesResponse sampleShawnMendesResponse = mapJsonToSampleShawnMendesResponse(getJsonSampleShawnMendesServer);
             System.out.println(sampleShawnMendesResponse);
         }
     }

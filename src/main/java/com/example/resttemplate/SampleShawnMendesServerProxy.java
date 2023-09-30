@@ -32,14 +32,14 @@ public class SampleShawnMendesServerProxy {
                 .host(url)
                 .port(port)
                 .path("/shawn/songs");
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("requestId", "something");
-        HttpEntity<HttpHeaders> httpEntity = new HttpEntity<>(httpHeaders);
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.add("requestId", "something");
+//        HttpEntity<HttpHeaders> httpEntity = new HttpEntity<>(httpHeaders);
         try {
             ResponseEntity<String> response = restTemplate.exchange(
                     builder.build().toUri(),
                     HttpMethod.GET,
-                    httpEntity,
+                   null,// httpEntity,
                     String.class
             );
             return response.getBody();
