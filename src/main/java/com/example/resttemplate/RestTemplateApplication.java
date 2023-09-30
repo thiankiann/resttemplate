@@ -31,7 +31,13 @@ public class RestTemplateApplication {
             System.out.println(shawnMendesResponse);
         }
 
-        String jsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makeRequest();
+//        String jsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makeRequest();
+//        if (jsonSampleShawnMendesServer != null) {
+//            SampleServerShawnMendesResponse sampleShawnMendesResponse = mapJsonToSampleShawnMendesResponse(jsonSampleShawnMendesServer);
+//            System.out.println(sampleShawnMendesResponse);
+//        }
+
+        String jsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makePostRequest();
         if (jsonSampleShawnMendesServer != null) {
             SampleServerShawnMendesResponse sampleShawnMendesResponse = mapJsonToSampleShawnMendesResponse(jsonSampleShawnMendesServer);
             System.out.println(sampleShawnMendesResponse);
