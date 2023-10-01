@@ -25,15 +25,32 @@ public class RestTemplateApplication {
 
     @EventListener(ApplicationStartedEvent.class)
     public void run() throws JsonProcessingException {
-        String json = shawnMendesClient.makeRequest("shawnmendes", 3);
-        if (json != null) {
-            ShawnMendesResponse shawnMendesResponse = mapJsonToShawnMendesResponse(json);
-            System.out.println(shawnMendesResponse);
-        }
+//        String json = shawnMendesClient.makeRequest("shawnmendes", 3);
+//        if (json != null) {
+//            ShawnMendesResponse shawnMendesResponse = mapJsonToShawnMendesResponse(json);
+//            System.out.println(shawnMendesResponse);
+//        }
 
-        String jsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makeRequest();
-        if (jsonSampleShawnMendesServer != null) {
-            SampleServerShawnMendesResponse sampleShawnMendesResponse = mapJsonToSampleShawnMendesResponse(jsonSampleShawnMendesServer);
+//        String jsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makeRequest();
+//        if (jsonSampleShawnMendesServer != null) {
+//            SampleServerShawnMendesResponse sampleShawnMendesResponse = mapJsonToSampleShawnMendesResponse(jsonSampleShawnMendesServer);
+//            System.out.println(sampleShawnMendesResponse);
+//        }
+
+        String postJsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makePostRequest();
+        if (postJsonSampleShawnMendesServer != null) {
+            SampleServerShawnMendesResponse sampleShawnMendesResponse = mapJsonToSampleShawnMendesResponse(postJsonSampleShawnMendesServer);
+            System.out.println(sampleShawnMendesResponse);
+        }
+        String getJsonSampleShawnMendesServer = sampleShawnMendesServerProxy.makeGetRequest();
+        sampleShawnMendesServerProxy.makeDeleteRequest("0");
+        String getJsonSampleShawnMendesServer2 = sampleShawnMendesServerProxy.makeGetRequest();
+        if (getJsonSampleShawnMendesServer != null) {
+            SampleServerShawnMendesResponse sampleShawnMendesResponse = mapJsonToSampleShawnMendesResponse(getJsonSampleShawnMendesServer);
+            System.out.println(sampleShawnMendesResponse);
+        }
+        if (getJsonSampleShawnMendesServer2 != null) {
+            SampleServerShawnMendesResponse sampleShawnMendesResponse = mapJsonToSampleShawnMendesResponse(getJsonSampleShawnMendesServer2);
             System.out.println(sampleShawnMendesResponse);
         }
     }
