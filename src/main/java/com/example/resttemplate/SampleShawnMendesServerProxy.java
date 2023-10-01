@@ -32,7 +32,7 @@ public class SampleShawnMendesServerProxy {
                 .host(url)
                 .port(port)
                 .path("/shawn/songs");
-//        HttpHeaders httpHeaders = new HttpHeaders();
+//        HttpHeaders httpHeaders = new HttpHeaders();        //that is just if we need to send headers
 //        httpHeaders.add("requestId", "something");
 //        HttpEntity<HttpHeaders> httpEntity = new HttpEntity<>(httpHeaders);
         try {
