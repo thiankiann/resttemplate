@@ -1,4 +1,4 @@
-package com.example.resttemplate;
+package com.example.resttemplate.itunes.proxy;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

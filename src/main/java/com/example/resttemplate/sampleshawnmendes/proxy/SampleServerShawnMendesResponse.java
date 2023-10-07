@@ -1,4 +1,4 @@
-package com.example.resttemplate;
+package com.example.resttemplate.sampleshawnmendes.proxy;
 
 import java.util.List;
 
